@@ -340,13 +340,6 @@ default_profession = Profession.create_default("Adventurer")
 print(default_profession.name)
 ```
 
-Output yang diharapkan:
-
-```text
-Adventurer
-```
-
-
 
 ---
 
@@ -360,14 +353,6 @@ Contoh:
 print(Stats.is_valid_stat(10))
 print(Stats.is_valid_stat(-5))
 ```
-
-Output yang diharapkan:
-
-```text
-True
-False
-```
-
 
 
 ---
