@@ -467,7 +467,7 @@ equipment.unequip_weapon(bravern)
 
 bonus Strength dari weapon dihilangkan.
 
-Alur pengujiannya:
+Alur:
 
 ```text
 Strength awal
@@ -481,12 +481,6 @@ Unequip Iron Sword
 Strength kembali
 ```
 
-
-Ini merupakan salah satu screenshot terpenting karena menunjukkan interaksi beberapa class sekaligus:
-
-```text
-Equipment → Weapon → Strong → TraitsManajer → Player → Stats
-```
 
 ---
 
@@ -525,7 +519,7 @@ Battle menentukan peserta yang mendapat giliran pertama berdasarkan Agility.
 
 Selanjutnya kedua peserta menyerang secara bergantian sampai salah satu health mencapai 0.
 
-Contoh alur:
+Alur:
 
 ```text
 Bravern menyerang Goblin
