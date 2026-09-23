@@ -346,9 +346,7 @@ Output yang diharapkan:
 Adventurer
 ```
 
-**Screenshot yang perlu diambil:**
 
-> Screenshot 1 — Bagian terminal yang menampilkan `CLASS METHOD` dan hasil `Adventurer`.
 
 ---
 
@@ -370,9 +368,7 @@ True
 False
 ```
 
-**Screenshot yang perlu diambil:**
 
-> Screenshot 2 — Bagian terminal yang menampilkan `STATIC METHOD`, `True`, dan `False`.
 
 ---
 
@@ -392,9 +388,7 @@ ogre = Monster(...)
 
 Object tersebut digunakan untuk menunjukkan bahwa setiap object dapat memiliki data yang berbeda.
 
-**Screenshot yang perlu diambil:**
 
-> Screenshot 3 — Output yang menampilkan data atau statistik dua Player dan dua Monster.
 
 ---
 
@@ -420,9 +414,7 @@ bukan secara langsung terhadap:
 bravern.__health
 ```
 
-**Screenshot yang perlu diambil:**
 
-> Screenshot 4 — Bagian terminal yang menunjukkan nilai health sebelum perubahan.
 
 ---
 
@@ -440,9 +432,6 @@ print(bravern.health)
 
 Output menunjukkan bahwa nilai health berhasil berubah.
 
-**Screenshot yang perlu diambil:**
-
-> Screenshot 5 — Bagian terminal yang menunjukkan health sebelum dan setelah diberikan nilai valid.
 
 ---
 
@@ -460,9 +449,7 @@ print(bravern.health)
 
 Setter akan melakukan validasi sehingga health tidak disimpan sebagai nilai negatif.
 
-**Screenshot yang perlu diambil:**
 
-> Screenshot 6 — Bagian terminal yang menunjukkan pengujian health dengan nilai negatif dan hasil validasinya.
 
 ---
 
@@ -509,9 +496,6 @@ Unequip Iron Sword
 Strength kembali
 ```
 
-**Screenshot yang perlu diambil:**
-
-> Screenshot 7 — Satu bagian terminal yang memperlihatkan Strength sebelum equip, setelah equip, dan setelah unequip.
 
 Ini merupakan salah satu screenshot terpenting karena menunjukkan interaksi beberapa class sekaligus:
 
@@ -538,9 +522,6 @@ print(bravern.is_alive())
 
 Pengujian ini menunjukkan bahwa method dapat mengubah dan memeriksa kondisi object.
 
-**Screenshot yang perlu diambil:**
-
-> Screenshot 8 — Output `is_alive()`, perubahan health setelah `take_damage()`, dan hasil `is_alive()`.
 
 ---
 
@@ -569,42 +550,5 @@ Bravern menyerang Goblin
 Salah satu kalah
 ```
 
-**Screenshot yang perlu diambil:**
-
-> Screenshot 9 — Bagian awal sampai akhir output battle yang menunjukkan serangan, perubahan health, dan pemenang.
-
 ---
 
-# Daftar Screenshot Dokumentasi
-
-Agar dokumentasi tidak terlalu panjang tetapi tetap membuktikan seluruh pengujian, screenshot yang disarankan adalah:
-
-| No. | Screenshot              | Yang Dibuktikan                                |
-| --- | ----------------------- | ---------------------------------------------- |
-| 1   | Class Method            | `Profession.create_default()`                  |
-| 2   | Static Method           | `Stats.is_valid_stat()`                        |
-| 3   | Object Player & Monster | Pembuatan beberapa object                      |
-| 4   | Getter                  | Pembacaan `health` melalui property            |
-| 5   | Setter Valid            | Setter menerima nilai valid                    |
-| 6   | Setter Tidak Valid      | Validasi nilai negatif                         |
-| 7   | Equipment + Strong      | Trait aktif saat equip dan hilang saat unequip |
-| 8   | Instance Method         | `take_damage()` dan `is_alive()`               |
-| 9   | Battle                  | Sistem pertarungan dan penentuan pemenang      |
-
-Jika output terlalu panjang, screenshot nomor 3 dan 4–6 dapat digabung selama seluruh informasi masih terbaca.
-
----
-
-# Kesimpulan
-
-Program **CLI Adventure** menerapkan konsep dasar Object-Oriented Programming menggunakan Python melalui beberapa class yang saling berinteraksi.
-
-Konsep Class dan Object digunakan untuk merepresentasikan Player, Monster, Equipment, Weapon, Profession, dan komponen lainnya. Attribute dan Method digunakan untuk menyimpan data serta menentukan perilaku masing-masing object.
-
-Encapsulation diterapkan pada data health menggunakan atribut private `__health`, sedangkan `@property` digunakan sebagai getter dan setter. Setter juga melakukan validasi agar nilai health tidak menjadi negatif.
-
-Program juga menggunakan `@classmethod` untuk menyediakan cara alternatif dalam membuat object Profession dan `@staticmethod` sebagai utility untuk melakukan validasi nilai statistik.
-
-Interaksi antar-object terlihat pada sistem equipment dan Trait. Weapon dapat membawa Trait `Strong`, kemudian `TraitsManajer` mengaktifkan atau menghilangkan bonus Strength ketika weapon digunakan atau dilepas.
-
-Dengan demikian, program tidak hanya menunjukkan penggunaan class secara terpisah, tetapi juga menunjukkan bagaimana beberapa object dapat bekerja sama membentuk sebuah sistem petualangan dan pertarungan sederhana.
