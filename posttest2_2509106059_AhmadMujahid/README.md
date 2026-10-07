@@ -228,33 +228,37 @@ Composition
 
 ## 1. Association
 
-Association digunakan ketika dua object saling berhubungan atau bekerja sama, tetapi keduanya dapat tetap berdiri sendiri.
+Association digunakan ketika dua object saling menggunakan atau berinteraksi, tetapi tidak saling memiliki secara permanen.
 
-Salah satu contohnya adalah hubungan antara:
+Pada program ini, salah satu contoh association terdapat pada method `attack()` di dalam class `Combatant`.
+
+```python
+def attack(self, target: Combatant) -> None:
+    target.take_damage(self.owner.stats.strength)
+```
+
+Pada method tersebut, object `target` diterima sebagai parameter dan hanya digunakan saat proses serangan berlangsung.
+
+Combatant yang menyerang tidak menyimpan `target` sebagai atribut tetap di dalam object-nya.
+
+Contohnya:
+
+```python
+bravern_combatant.attack(goblin_combatant)
+```
+
+Dalam pemanggilan tersebut, `goblin_combatant` digunakan oleh `bravern_combatant` sebagai target serangan.
+
+Setelah proses serangan selesai, kedua object tetap dapat berdiri sendiri dan tidak bergantung satu sama lain.
+
+Karena itu hubungan tersebut termasuk **association**.
 
 ```text
-Battle -------- Combatant
+Combatant ..> Combatant
+          menyerang
 ```
 
-`Battle` menerima dua object `Combatant`:
-
-```python
-battle = Battle(bravern_combatant, goblin_combatant)
-```
-
-Object Combatant sudah dibuat terlebih dahulu:
-
-```python
-bravern_combatant = Combatant(owner=bravern, max_health=100)
-
-goblin_combatant = Combatant(owner=goblin, max_health=100)
-```
-
-Setelah itu kedua object diberikan kepada Battle.
-
-Battle menggunakan Combatant untuk menjalankan pertarungan, tetapi Battle tidak bertugas membuat atau memiliki keseluruhan hidup Combatant tersebut.
-
-Karena itu hubungan ini digunakan sebagai contoh **association**.
+Relasi ini menunjukkan bahwa satu `Combatant` menggunakan `Combatant` lain sebagai target melalui parameter method, tanpa memiliki target tersebut secara permanen.
 
 ---
 
@@ -320,49 +324,43 @@ Karena Item tidak bergantung sepenuhnya kepada Inventory untuk keberadaannya, hu
 
 ## 3. Composition
 
-Composition memiliki hubungan yang lebih kuat.
+Composition merupakan hubungan yang kuat antara object induk dan object bagian.
 
-Object yang menjadi bagian dari object lain dibuat dan dikelola sebagai bagian dari pemiliknya.
+Object bagian dibuat langsung di dalam object induk dan menjadi bagian dari object tersebut.
 
-Contoh pada program ini terdapat pada `Player`.
+Pada program ini, contoh composition terdapat pada hubungan antara `Character` dan `TraitManager`.
 
 ```text
-Player ◆------ Inventory
+Character ◆------ TraitManager
+```
+
+Pada saat object `Character` dibuat, object `TraitManager` juga langsung dibuat di dalam constructor.
+
+```python
+class Character:
+    def __init__(self, name: str, stats: Stats) -> None:
+        self._name = name
+        self._stats = stats
+        self.__trait_manager = TraitManager()
+```
+
+`TraitManager` digunakan sebagai bagian internal dari Character untuk mengelola Trait yang dimiliki oleh karakter.
+
+Dengan demikian, setiap Character memiliki TraitManager miliknya sendiri.
+
+Contoh composition lain pada program adalah hubungan antara `Player` dan `Equipment`.
+
+```text
 Player ◆------ Equipment
 ```
 
-Pada saat Player dibuat, Player juga langsung membuat Inventory dan Equipment miliknya.
+Pada saat Player dibuat, Equipment juga dibuat langsung di dalam Player.
 
 ```python
-class Player(Character):
-    def __init__(...):
-        super().__init__(name, stats)
-
-        ...
-
-        self.inventory = Inventory()
-        self.equipment = Equipment()
+self.equipment = Equipment()
 ```
 
-Inventory dan Equipment tersebut menjadi bagian langsung dari Player.
-
-Dengan desain ini setiap Player memiliki Inventory dan Equipment masing-masing.
-
-Contoh:
-
-```python
-bravern = Player(...)
-```
-
-secara otomatis juga menghasilkan:
-
-```text
-Bravern
-├── Inventory
-└── Equipment
-```
-
-Hubungan inilah yang digunakan sebagai contoh **composition** pada program.
+Equipment menjadi bagian langsung dari Player dan digunakan untuk menyimpan weapon serta armor yang sedang digunakan.
 
 ---
 
@@ -373,14 +371,14 @@ Relasi utama pada program dapat diringkas seperti berikut:
 ```text
 INHERITANCE
 
-           Character
-           /       \
-      Player       Monster
+Player  ------▷ Character
+Monster ------▷ Character
 
 
 ASSOCIATION
 
-Battle -------- Combatant
+Combatant ..> Combatant
+          menyerang
 
 
 AGGREGATION
@@ -392,7 +390,7 @@ Inventory ◇------ Item
 
 COMPOSITION
 
-Player ◆--------- Inventory
+Character ◆------ TraitManager
 
 Player ◆--------- Equipment
 ```
