@@ -239,10 +239,7 @@ Battle -------- Combatant
 `Battle` menerima dua object `Combatant`:
 
 ```python
-battle = Battle(
-    bravern_combatant,
-    goblin_combatant
-)
+battle = Battle(bravern_combatant, goblin_combatant)
 ```
 
 Object Combatant sudah dibuat terlebih dahulu:
