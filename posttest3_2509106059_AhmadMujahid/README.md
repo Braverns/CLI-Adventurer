@@ -2,163 +2,86 @@
 
 ## Deskripsi Program
 
-**CLI Adventure** adalah game petualangan berbasis Command Line Interface (CLI) menggunakan Python dan Object-Oriented Programming (OOP).
+**CLI Adventure** merupakan game petualangan berbasis Command Line Interface (CLI) yang dibuat menggunakan Python 3.14.2 dengan pendekatan Object-Oriented Programming (OOP).
 
-Setelah Kerajaan Akhetaria menyatukan lima benua, seorang remaja berusia 15 tahun memulai petualangannya di Fernley. Kota terpencil di barat daya kerajaan ini hanya mempunyai satu guild dengan sedikit petualang aktif.
+Pemain berperan sebagai petualang muda di Kota Fernley, Kerajaan Akhetaria. Pemain menjalani event, mengelola perlengkapan, dan menyelesaikan quest **The Missing Apple**, yaitu penyelidikan pencurian apel di ladang Pak Warrey.
 
-Pemain menerima pekerjaan **The Missing Apple** dari Pak Warrey untuk menyelidiki pencurian apel. Cara menghadapi goblin dan keputusan terhadap Orachulm menentukan penutup petualangan.
-
-Program ini khusus pengumpulan posttest dalam bentuk CLI. Menu, narasi, battle, dan epilog menggunakan bingkai kotak. Seluruh program menggunakan standard library Python 3.14.2; tidak ada paket tambahan yang perlu diinstal.
+Pilihan menghadapi goblin dan Orachulm menentukan hasil penyelidikan. Pertarungan berjalan otomatis; setiap kekalahan mengurangi satu nyawa dan nyawa nol mengakhiri petualangan. Pemain juga memperoleh EXP, dengan lima poin stat pada setiap kenaikan level.
 
 ---
 
-# Fitur Program
+# 1. Relasi UML
 
-1. Dua event awal: monster atau cerita pendek, lalu pedagang atau tavern.
-2. Cerita satu pertemuan **Surat di Jembatan**.
-3. Quest utama dengan empat pendekatan: serang, interogasi CHA, INT, atau STR.
-4. Dua encounter monster selama perjalanan menuju Orachulm.
-5. Auto battle satu lawan satu, giliran berdasarkan agility, dan status racun.
-6. Setiap kalah battle mengurangi satu nyawa; nyawa nol mengakhiri petualangan.
-7. HP combat dan status sementara direset pada battle baru.
-8. Inventory sepuluh slot serta equipment dengan tujuh slot.
-9. Senjata dua tangan, pergantian equipment, serta penggabungan stack trait.
-10. Pedagang mendukung beli dan jual; tavern memulihkan satu nyawa berbayar atau boleh dilewati.
-11. EXP, level, dan **tepat 5 poin stat pada setiap kenaikan level**.
-12. Enam hasil akhir, termasuk kematian, quest gagal, dan Orc Slayer.
+## Class Diagram
 
-Scope posttest ini berakhir setelah quest utama berhasil atau gagal. Pengembangan game berikutnya merupakan proyek terpisah dari pengumpulan ini.
+Diagram perlu memuat nama kelas, atribut atau method utama, serta garis relasi. Gambar diagram disimpan sebagai **`images/uml_class_diagram.png`**.
 
----
+<!-- ![Class Diagram CLI Adventure](images/uml_class_diagram.png) -->
 
-# Cara Menjalankan Program
+Gambar belum ditambahkan. Setelah PNG tersedia, hapus penanda komentar HTML pada baris gambar di atas.
 
-Gunakan **Python 3.14.2**. Buka terminal pada folder repository, lalu jalankan:
+Acuan kelas untuk menggambar diagram:
 
-```bash
-python posttest3_2509106059_AhmadMujahid/code/main.py
-```
-
-Atau, dari folder `posttest3_2509106059_AhmadMujahid`:
-
-```bash
-python code/main.py
-```
-
-Nama dan seed dapat diberikan langsung:
-
-```bash
-python code/main.py --name Bravern --seed 7
-```
-
-Seed membantu mengulangi undian dengan rangkaian tindakan yang sama. Tindakan berbeda dapat mengonsumsi angka acak berbeda pula.
-
-## Kontrol
-
-| Input | Fungsi |
+| Class | Atribut / method utama |
 |---|---|
-| Nomor pilihan | Memilih tindakan pada event aktif. |
-| `profil` | Menampilkan karakter, stat, quest, dan reputasi. |
-| `inventory` | Menampilkan item, equipment, dan trait aktif. |
-| `equip 0` | Memasang item inventory slot 0 pada slot kompatibel yang tersedia. |
-| `equip 0 main_hand` | Memilih main hand secara eksplisit untuk penggantian. |
-| `unequip main_hand` | Mengembalikan equipment ke inventory. |
-| `stat strength 5` | Mengalokasikan lima poin ke strength jika saldo cukup. |
-| `bantuan` | Menampilkan petunjuk. |
-| `keluar` | Menghentikan sesi tanpa menyimpan progres. |
+| Character | `_name`, `_stats`, `__trait_manager`, `get_info()` |
+| Player | `_lives`, `level`, `_stat_points`, `inventory`, `equipment` |
+| Monster | `rarity`, `monster_type`, `get_info()` |
+| Combatant | `owner`, `__health`, `attack(target)` |
+| Inventory | `items`, `add_item()`, `remove_item()` |
+| Equipment | `main_hand`, `off_hand`, `equip_from_inventory()` |
+| Item | `name`, `price`, `description` |
+| TraitManager | `traits`, `add_trait()`, `remove_trait()` |
+| Event | `_completed`, `get_choices()`, `resolve()`, `validate_choice()` |
+| MonsterEvent | `monster`, `get_choices()`, `resolve()` |
+| MerchantEvent | `stock`, `get_choices()`, `resolve()` |
+| TavernEvent | `rest_cost`, `get_choices()`, `resolve()` |
+| StoryEvent | `nodes`, `get_choices()`, `resolve()` |
 
-Stat: `strength`, `agility`, `defense`, `intelligence`, `charisma`.
-
-Slot: `head`, `chest`, `back`, `legs`, `boots`, `main_hand`, `off_hand`. Slot inventory menggunakan indeks mulai dari 0.
-
-Contoh bingkai terminal:
+Relasi yang digambarkan:
 
 ```text
- ________________________________
-| PETUALANGAN                    |
-|                                |
-| 1. Langsung serang goblin       |
-| 2. Interogasi menggunakan CHA   |
-|________________________________|
+Asosiasi:
+Combatant ..> Combatant : attack(target)
+
+Agregasi:
+Inventory o-- Item
+
+Komposisi:
+Player *-- Inventory
+Player *-- Equipment
+Character *-- TraitManager
+
+Inheritance:
+Character <|-- Player
+Character <|-- Monster
+Event <|-- MonsterEvent
+Event <|-- MerchantEvent
+Event <|-- TavernEvent
+Event <|-- StoryEvent
 ```
+
+Wajik kosong agregasi dan wajik penuh komposisi ditempatkan pada sisi pemilik. Panah segitiga inheritance mengarah ke superclass. Notasi asosiasi `..>` mengikuti asosiasi/dependensi searah pada Modul 4.
+
+## Asosiasi
+
+`Combatant.attack(target)` menerima Combatant lain sebagai parameter untuk menerima serangan. Target hanya digunakan dalam operasi tersebut dan tidak dimiliki oleh penyerang.
+
+## Agregasi
+
+`Inventory` menampung objek `Item` yang dibuat di luar inventory. Item tetap ada ketika dikeluarkan dan dapat dipindahkan ke equipment atau pedagang, sehingga siklus hidupnya tidak bergantung pada Inventory.
+
+## Komposisi
+
+`Player` membuat objek `Inventory` dan `Equipment` di dalam constructor sebagai bagian internal pemain. `Character` juga membuat `TraitManager` sendiri; objek bagian tersebut dikelola untuk karakter pemiliknya, bukan dibagikan sebagai bagian milik beberapa karakter.
 
 ---
 
-# Struktur Program
+# 2. Abstraksi
 
-```text
-posttest3_2509106059_AhmadMujahid/
-├── code/
-│   ├── main.py
-│   ├── cli/            -> format kotak dan driver pendukung
-│   ├── core/           -> sesi, pengatur event, enum, hasil aksi
-│   ├── characters/     -> Character, Player, Monster, Combatant, Profession
-│   ├── combat/         -> Battle
-│   ├── inventory/      -> Inventory
-│   ├── equipment/      -> Equipment
-│   ├── items/          -> Item dan equipment
-│   ├── events/         -> ABC Event beserta implementasinya
-│   ├── story/          -> Quest dan The Missing Apple
-│   ├── content/        -> balancing, katalog, cerita pendek, ending
-│   ├── utils/          -> Stats dan sistem trait
-│   └── testing/        -> demonstrasi posttest dan peluncur pengujian
-├── docs/
-│   ├── RANCANGAN.md
-│   ├── uml_class_diagram.mmd
-│   └── evidence/       -> output teks asli dari eksekusi
-├── images/
-│   └── README.md       -> daftar gambar yang perlu dibuat
-├── tests/
-└── README.md
-```
+## Abstract Class dan Abstract Method
 
-Rincian atribut, tanggung jawab setiap file, dan diagram alur terdapat dalam [rancangan program](docs/RANCANGAN.md).
-
----
-
-# Alur Permainan
-
-```text
-Buat karakter
-      ↓
-Event awal 1: monster / Surat di Jembatan
-      ↓
-Event awal 2: pedagang / tavern
-      ↓
-Terima The Missing Apple, langsung malam pertama
-      ↓
-Serang / interogasi CHA / INT / STR
-      ↓
-Battle goblin
-      ├── kalah → nyawa -1 → quest gagal
-      └── menang
-            ├── tanpa informasi → melapor → berhasil
-            └── dengan informasi → siang hari kedua
-                                      ↓
-                                Monster perjalanan 1
-                                      ↓
-                                Monster perjalanan 2
-                                      ↓
-                                Orachulm, malam kedua
-                                  ├── kembali → melapor → berhasil
-                                  └── battle
-                                        ├── menang → Great Sword + Orc Slayer
-                                        └── kalah → nyawa -1 → kabur
-                                              ↓
-                                            melapor → berhasil
-```
-
-Pada semua battle, nyawa nol langsung mengakhiri petualangan. Dua monster perjalanan dihitung sebagai event selesai meskipun pemain kalah tetapi masih hidup; keduanya tidak menggagalkan quest.
-
-Batas tiga hari adalah konteks cerita. Waktu bergerak mengikuti adegan; pemain tidak mempunyai aksi menunggu bebas.
-
----
-
-# Abstraksi
-
-## Abstract Class `Event`
-
-`Event` menggunakan `ABC` dengan dua abstract method:
+Class `Event` pada `code/events/event.py` menggunakan `ABC` dan mempunyai dua abstract method:
 
 ```python
 class Event(ABC):
@@ -171,68 +94,58 @@ class Event(ABC):
         pass
 ```
 
-Kedua method wajib diimplementasikan oleh `MonsterEvent`, `MerchantEvent`, `TavernEvent`, dan `StoryEvent`.
-
-- `get_choices()` menentukan tindakan yang tersedia.
-- `resolve()` melaksanakan tindakan dan mengembalikan hasilnya.
+`get_choices()` menentukan tindakan yang tersedia, sedangkan `resolve()` memproses pilihan pemain. Keduanya wajib diimplementasikan oleh `MonsterEvent`, `MerchantEvent`, `TavernEvent`, dan `StoryEvent`.
 
 ## Method Konkret Bersama
 
-`Event.validate_choice()` memeriksa apakah event sudah selesai, apakah pilihan tersedia, dan apakah pilihan terkunci. Seluruh subclass memanggil method konkret ini dari `resolve()`, sehingga validasi dasar tidak perlu disalin.
+`Event.validate_choice()` merupakan method konkret yang digunakan oleh seluruh subclass melalui pemanggilan di dalam `resolve()`. Method ini memastikan event belum selesai, ID pilihan tersedia, dan pilihan tidak terkunci sebelum tindakan diproses.
 
-## Bukti Abstract Class Tidak Bisa Diinstansiasi
+## Inheritance, super(), dan Atribut Khusus
 
-Jalankan:
+Setiap subclass Event memanggil `super().__init__(...)` untuk menginisialisasi data bersama, kemudian menambahkan atribut khusus:
 
-```bash
-python code/testing/posttest_demo.py
-```
-
-Bagian **BUKTI ABSTRAKSI** mencoba membuat `Event` di dalam `try-except TypeError`. Python menolak karena `get_choices()` dan `resolve()` belum diimplementasikan. Kalimat error tepatnya dapat berbeda menurut versi Python; output sebenarnya disimpan pada [bukti demonstrasi](docs/evidence/posttest_demo.txt).
-
----
-
-# Inheritance dan Encapsulation
-
-```text
-Character
-├── Player
-└── Monster
-
-Event (ABC)
-├── MonsterEvent
-├── MerchantEvent
-├── TavernEvent
-└── StoryEvent
-
-Item
-└── EquippableItem
-    ├── Weapon
-    ├── Armor
-    ├── Shield
-    └── Accessory
-```
-
-Subclass menjalankan constructor parent melalui `super().__init__(...)`. Atribut unik misalnya `MonsterEvent.monster`, `MerchantEvent.stock`, `TavernEvent.rest_cost`, dan `StoryEvent.nodes`.
-
-Atribut protected seperti `Event._completed`, `Player._lives`, dan `Player._stat_points` dikelola melalui method domain. Atribut private `Combatant.__health` dan `TraitEntry.__stack` dibaca melalui property; HP dibatasi antara nol dan maksimum, sedangkan stack invalid ditolak.
-
----
-
-# Polimorfisme
-
-## 1. Polimorfisme melalui Pewarisan
-
-Semua turunan `Event` mengimplementasikan `get_choices()` serta `resolve()` dengan perilaku berbeda.
-
-| Subclass | Perilaku |
+| Subclass | Atribut khusus |
 |---|---|
-| MonsterEvent | Meminta battle dan menyelesaikan encounter. |
-| MerchantEvent | Memproses beli, jual, dan pergi. |
-| TavernEvent | Memulihkan satu nyawa berbayar atau melewati tavern. |
-| StoryEvent | Menyelesaikan pilihan naratif atau memulai battle cerita. |
+| MonsterEvent | `monster` |
+| MerchantEvent | `stock` |
+| TavernEvent | `rest_cost` |
+| StoryEvent | `nodes`, `current_node_id` |
 
-Pada `demonstrate_polymorphism()` dalam `code/testing/posttest_demo.py`, keempat objek dimasukkan ke satu list dan dipanggil dalam **satu loop**:
+Encapsulation digunakan melalui atribut protected seperti `Event._completed` dan `Player._stat_points`, serta atribut private seperti `Combatant.__health` dan `TraitEntry.__stack`. Property menyediakan pembacaan data, sementara method mengatur perubahan sesuai aturan program.
+
+## Bukti Abstract Class Tidak Dapat Diinstansiasi
+
+Pada `code/testing/posttest_demo.py`, program mencoba membuat Event melalui `try-except TypeError`:
+
+```python
+try:
+    Event("abstract", "Event abstrak", "Tidak dapat dibuat langsung")
+except TypeError as error:
+    show_box("1. BUKTI ABSTRAKSI", [type(error).__name__ + ": " + str(error)])
+```
+
+Python menolak instansiasi karena dua abstract method belum diimplementasikan. Pada Python 3.14.2, pesan error menyebut abstract method `get_choices` dan `resolve`.
+
+**Screenshot:** simpan kotak bagian **1. BUKTI ABSTRAKSI** sebagai `images/bukti_abstraksi.png`.
+
+<!-- ![Bukti Abstract Class Tidak Dapat Diinstansiasi](images/bukti_abstraksi.png) -->
+
+---
+
+# 3. Polimorfisme
+
+## Polimorfisme melalui Pewarisan
+
+Keempat subclass Event meng-override `get_choices()` dan `resolve()` dengan perilaku berbeda:
+
+| Subclass | Perilaku resolusi |
+|---|---|
+| MonsterEvent | Memulai pertarungan melawan monster. |
+| MerchantEvent | Memproses pembelian, penjualan, atau pergi. |
+| TavernEvent | Memulihkan satu nyawa berbayar atau pergi. |
+| StoryEvent | Memproses keputusan cerita dan konsekuensinya. |
+
+Fungsi `demonstrate_polymorphism()` memasukkan objek-objek tersebut dalam satu list dan memanggil method yang sama melalui satu loop:
 
 ```python
 for event in events:
@@ -241,153 +154,85 @@ for event in events:
     result = event.resolve(session, choice.choice_id)
 ```
 
-Pemanggil tidak memilih perilaku dengan rantai pemeriksaan jenis objek. GameSession juga berinteraksi melalui kontrak yang sama.
+Perilaku ditentukan oleh implementasi masing-masing objek, bukan pemeriksaan jenis objek di pemanggil.
 
-## 2. Duck Typing
+**Screenshot:** simpan kotak bagian **2. POLIMORFISME VIA PEWARISAN** sebagai `images/polimorfisme_pewarisan.png`.
 
-`Choice` dan `ConditionalChoice` adalah dua class yang **tidak berhubungan lewat inheritance aplikasi**. Keduanya memiliki `describe()`, lalu dipanggil oleh satu fungsi:
+<!-- ![Polimorfisme melalui Pewarisan](images/polimorfisme_pewarisan.png) -->
+
+## Duck Typing
+
+`Choice` dan `ConditionalChoice` adalah dua class tanpa hubungan pewarisan satu sama lain maupun superclass aplikasi bersama. Keduanya memiliki method `describe()`.
+
+Keduanya dipanggil melalui fungsi `describe_options()` dalam `code/cli/console.py`:
 
 ```python
-def describe_options(options):
+def describe_options(options) -> list[str]:
     return [option.describe() for option in options]
 ```
 
-Pilihan biasa menghasilkan label; pilihan bersyarat menambahkan nama stat dan tingkat kesulitan. Fungsi ini dipakai dalam permainan, bukan hanya demonstrasi.
+`Choice.describe()` menghasilkan label pilihan biasa. `ConditionalChoice.describe()` menambahkan nama stat dan kesulitan pemeriksaan pada label. Fungsi yang sama digunakan saat menampilkan pilihan permainan.
 
-## 3. Magic Method / Operator Overloading
+## Operator Overloading / Magic Method
 
-| Class | Method | Penggunaan nyata |
+| Class | Magic method | Penggunaan |
 |---|---|---|
-| Inventory | `__len__()` | `len(player.inventory)` menghitung barang yang tersimpan. |
+| Inventory | `__len__()` | Menghitung jumlah barang melalui `len(inventory)`. |
 | Item | `__str__()` | Menampilkan nama, harga, dan deskripsi item. |
-| Stats | `__str__()` | Menampilkan lima stat pada profil. |
+| Stats | `__str__()` | Menampilkan lima stat karakter pada profil. |
 
-Ini mengikuti daftar magic method yang diperbolehkan pada tugas.
+Magic method tersebut mengikuti bentuk yang diperbolehkan dalam posttest dan digunakan pada output program.
 
-## 4. Menghindari Anti-Pattern
+**Screenshot:** simpan kotak bagian **3. DUCK TYPING** dan **4. MAGIC METHOD DAN RELASI** sebagai `images/duck_typing_magic_method.png`.
 
-Equipment memproses kontrak `allowed_slots`, `occupied_slots`, dan `traits`, sehingga tidak memakai rantai `if Weapon / elif Armor / elif Shield`. Event dipanggil melalui method-nya sendiri.
+<!-- ![Duck Typing dan Magic Method](images/duck_typing_magic_method.png) -->
 
-Pemeriksaan validasi, hasil menang/kalah, dan fase permainan tetap diperlukan sebagai aturan domain. Penggunaan `type(trait)` sebagai kunci penggabungan stack dan pencocokan status bukan rantai pemilihan perilaku berdasarkan class.
+## Menghindari Anti-Pattern
 
----
-
-# Relasi UML
-
-## Diagram Class
-
-Sumber diagram siap diekspor: [uml_class_diagram.mmd](docs/uml_class_diagram.mmd).
-
-**Gambar belum disediakan sesuai permintaan.** Buat `images/uml_class_diagram.png` menggunakan sumber diagram tersebut atau gambar ulang di draw.io. Setelah tersedia, aktifkan baris gambar berikut dengan menghapus penanda komentar HTML:
-
-<!-- ![Diagram Class CLI Adventure](images/uml_class_diagram.png) -->
-
-## 1. Asosiasi
-
-`Combatant.attack(target)` memakai Combatant lain sebagai parameter serangan tanpa memiliki target tersebut. Diagram menggunakan panah putus-putus `..>`, mengikuti notasi asosiasi/dependensi searah dalam Modul 4.
-
-## 2. Agregasi
-
-`Inventory` menampung referensi `Item` yang dibuat di luar inventory. Item dapat dipindahkan atau dikeluarkan dan tetap menjadi objek mandiri; gunakan wajik kosong pada sisi Inventory.
-
-## 3. Komposisi
-
-`Player` membuat `Inventory` dan `Equipment` sendiri dalam constructor; `Character` juga membuat TraitManager internal. Bagian tersebut dikelola sebagai milik karakter terkait, sehingga wajik penuh berada pada sisi pemilik.
-
-Komposisi menggambarkan kepemilikan dalam desain; tidak berarti Python memaksa objek lenyap jika referensi lain sengaja disimpan.
+Event diproses melalui method `get_choices()` dan `resolve()`, tanpa rantai `if/elif` yang memilih perilaku berdasarkan tipe Event. Equipment memakai data `allowed_slots`, `occupied_slots`, dan `traits`, sehingga tidak memerlukan cabang terpisah untuk setiap class equipment.
 
 ---
 
-# Penerapan SOLID (Opsional)
+# 4. Prinsip SOLID (Opsional)
 
 ## Single Responsibility Principle
 
-`Battle` menghitung pertarungan, event menentukan konsekuensi, `GameSession` mengoordinasikan sesi, dan `cli/console.py` membentuk tampilan kotak. Perubahan tampilan tidak memerlukan penambahan output terminal di class Battle.
+`Battle` menangani perhitungan pertarungan, event menentukan konsekuensi, dan `cli/console.py` menangani format output. Perubahan bentuk kotak tidak mengharuskan perubahan pada perhitungan battle.
 
 ## Open/Closed Principle
 
-Pemanggil event menggunakan `get_choices()` dan `resolve()`. Perilaku event baru dapat ditambahkan melalui subclass tanpa menambah rantai pemeriksaan tipe pada GameSession; pendaftaran posisi kontennya tetap dilakukan pada EventDirector.
-
-Kontrak `occupied_slots` juga memungkinkan Weapon melaporkan kebutuhan dua tangan tanpa Equipment memeriksa nama class senjata.
+`GameSession` memanggil Event melalui kontrak bersama. Perilaku event dapat diperluas melalui subclass tanpa menambah rantai pemeriksaan tipe pada pemanggil; pendaftaran kontennya tetap dilakukan dalam EventDirector.
 
 ---
 
-# Pengujian
+# 5. Output Program
 
-Dari folder posttest3:
+Jalankan permainan dari folder `posttest3_2509106059_AhmadMujahid`:
+
+```bash
+python code/main.py
+```
+
+Jalankan demonstrasi abstraksi dan polimorfisme:
+
+```bash
+python code/testing/posttest_demo.py
+```
+
+Jalankan pengujian:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-Alternatif peluncur:
+Seluruh 34 pengujian telah lulus menggunakan Python 3.14.2. Pengujian mencakup cabang cerita, aturan nyawa, transaksi, equipment, kenaikan level, dan konsep OOP.
 
-```bash
-python code/testing/testing.py
-```
+**Screenshot permainan:** simpan tampilan cerita atau epilog sebagai `images/output_permainan.png`.
 
-Pengujian mencakup rute cerita, kematian pada berbagai encounter, transaksi, pergantian equipment dua tangan, batas stack, poin level, kontrak ABC, duck typing, dan eksekusi CLI nyata.
+<!-- ![Output Permainan](images/output_permainan.png) -->
 
-Output pengujian terakhir tersedia di [hasil pengujian](docs/evidence/tests.txt). Screenshot tetap dibuat dari terminal oleh pengguna.
+**Screenshot pengujian:** simpan ringkasan jumlah pengujian dan hasil `OK` sebagai `images/hasil_pengujian.png`.
 
-## Rute Reproduksi Orc Slayer
-
-Jalankan `python code/main.py --seed 7 --name Bravern`, lalu masukkan urutan ini:
-
-```text
-1
-4
-equip 0
-1
-4
-stat strength 5
-1
-1
-2
-1
-```
-
-Urutannya: bantu pengelana, beli Giant Armor, pasang armor, tinggalkan pedagang, interogasi STR, alokasikan poin, lewati dua battle perjalanan, lawan Orachulm, lalu melapor.
-
-Contoh ini berlaku untuk balancing dan konsumsi RNG saat ini. Output eksekusi tersedia di [gameplay Orc Slayer](docs/evidence/gameplay_orc_slayer.txt).
-
----
-
-# Gambar yang Perlu Ditambahkan
-
-Lihat [panduan gambar](images/README.md). Tidak ada screenshot atau diagram PNG yang diklaim sudah dibuat.
-
-| Nama file | Isi |
-|---|---|
-| uml_class_diagram.png | Diagram kelas dengan asosiasi, agregasi, komposisi, dan inheritance. |
-| bukti_abstraksi.png | TypeError saat Event diinstansiasi. |
-| polimorfisme_pewarisan.png | Satu loop memanggil empat subclass Event. |
-| duck_typing_magic_method.png | Output duck typing serta str()/len(). |
-| gameplay_orc_slayer.png | Penutup Orc Slayer, nyawa, level, gold, dan reputasi. |
-| hasil_pengujian.png | Ringkasan pengujian dengan hasil OK. |
-
-Aktifkan referensi berikut setelah file gambar tersedia:
-
-<!-- ![Bukti Abstraksi](images/bukti_abstraksi.png) -->
-<!-- ![Polimorfisme Pewarisan](images/polimorfisme_pewarisan.png) -->
-<!-- ![Duck Typing dan Magic Method](images/duck_typing_magic_method.png) -->
-<!-- ![Gameplay Orc Slayer](images/gameplay_orc_slayer.png) -->
 <!-- ![Hasil Pengujian](images/hasil_pengujian.png) -->
 
----
-
-# Balancing dan Batas Versi
-
-Angka awal implementasi: tiga nyawa, 100 gold, dan 100 HP combat pemain. EXP level berikutnya adalah `20 × level sekarang`. Setiap level memberi tepat lima poin; satu poin menaikkan satu stat sebanyak satu.
-
-Damage adalah `max(1, strength - defense)`. Interogasi menggunakan `d20 + stat >= 18`. Harga jual setengah harga beli, dibulatkan ke bawah. Tavern berbiaya 25 gold; laporan quest memberi 40 gold dan 10 EXP.
-
-Angka tersebut adalah nilai awal implementasi agar game dapat dijalankan; jumlah lima poin per level mengikuti keputusan tetap pengguna. Angka umum berada di `content/balance.py`, sedangkan data item dan monster berada pada katalog/constructor terkait.
-
----
-
-# Referensi Materi
-
-Penjelasan OOP mengikuti Modul 4 UML Class Relationships, Modul 5 Inheritance, Modul 6 Polimorfisme & Abstraksi, dan Modul 7 Prinsip SOLID yang diberikan pada tugas.
-
-Program, narasi Fernley, dan The Missing Apple mengikuti rancangan proyek. Referensi Life in Adventure digunakan sebagai inspirasi hubungan cerita dan sistem, bukan penyalinan karakter atau aset game.
+Gambar belum dibuat. Semua tempat gambar sudah disiapkan di README ini; setelah menambahkan PNG ke folder images, hapus penanda komentar HTML pada baris gambar terkait.
