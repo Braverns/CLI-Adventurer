@@ -101,6 +101,9 @@ def demonstrate_level() -> None:
     player = create_player()
     levels = player.gain_experience(65)
 
+    assert levels == 2
+    assert player.stat_points == 10
+
     show_box("5. POIN STAT PER LEVEL", [
         f"65 EXP menghasilkan kenaikan {levels} level.",
         f"Level: {player.level} | Poin stat: {player.stat_points} | Sisa EXP: {player.experience}",
@@ -114,6 +117,8 @@ def main() -> None:
     demonstrate_duck_typing()
     demonstrate_dunder_and_relationships()
     demonstrate_level()
+
+    show_box("HASIL PENGUJIAN", ["Seluruh demonstrasi OOP berhasil dijalankan."])
 
 if __name__ == "__main__":
     main()

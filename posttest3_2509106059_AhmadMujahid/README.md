@@ -228,19 +228,19 @@ Jalankan demonstrasi abstraksi dan polimorfisme:
 python code/testing/posttest_demo.py
 ```
 
-Jalankan pengujian:
+Alternatif untuk menjalankan seluruh demonstrasi:
 
 ```bash
-python -m unittest discover -s tests -v
+python code/testing/testing.py
 ```
 
-Seluruh 35 pengujian telah lulus menggunakan Python 3.14.2. Pengujian mencakup cabang cerita, aturan nyawa, transaksi, equipment, kenaikan level, dan konsep OOP.
+Demonstrasi dijalankan menggunakan Python 3.14.2 dan menampilkan bukti abstraksi, overriding, duck typing, magic method, relasi objek, serta poin kenaikan level.
 
 **Screenshot permainan:** simpan tampilan cerita atau epilog sebagai `images/output_permainan.png`.
 
 <!-- ![Output Permainan](images/output_permainan.png) -->
 
-**Screenshot pengujian:** simpan ringkasan jumlah pengujian dan hasil `OK` sebagai `images/hasil_pengujian.png`.
+**Screenshot pengujian:** simpan kotak **HASIL PENGUJIAN** pada akhir demonstrasi sebagai `images/hasil_pengujian.png`.
 
 <!-- ![Hasil Pengujian](images/hasil_pengujian.png) -->
 
