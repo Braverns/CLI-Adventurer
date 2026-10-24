@@ -1,4 +1,3 @@
-from __future__ import annotations
 from math import isfinite
 from characters.character import Character
 from content.balance import calculate_damage

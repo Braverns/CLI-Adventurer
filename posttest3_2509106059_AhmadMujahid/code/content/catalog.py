@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from characters.classes.profession import Profession
 from characters.monster import Monster
 from characters.player import Player

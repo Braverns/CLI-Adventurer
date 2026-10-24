@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 STAT_POINTS_PER_LEVEL = 5
 INITIAL_LIVES = 3
 INITIAL_GOLD = 100

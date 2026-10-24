@@ -1,0 +1,42 @@
+Python: 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]
+Command: -m unittest discover -s tests -v
+
+test_completed_battle_is_processed_once_and_next_starts_full (test_battle.BattleTests.test_completed_battle_is_processed_once_and_next_starts_full) ... ok
+test_equal_agility_prioritizes_player_and_damage_has_floor (test_battle.BattleTests.test_equal_agility_prioritizes_player_and_damage_has_floor) ... ok
+test_hp_clamp_and_negative_damage (test_battle.BattleTests.test_hp_clamp_and_negative_damage) ... ok
+test_seeded_sessions_have_same_battle_outcome (test_battle.BattleTests.test_seeded_sessions_have_same_battle_outcome) ... ok
+test_status_death_before_attack_and_idempotent_result (test_battle.BattleTests.test_status_death_before_attack_and_idempotent_result) ... ok
+test_status_duration_refresh_is_capped (test_battle.BattleTests.test_status_duration_refresh_is_capped) ... ok
+test_boxes_wrap_and_have_equal_width_without_dash_rules (test_cli.CliTests.test_boxes_wrap_and_have_equal_width_without_dash_rules) ... ok
+test_real_cli_short_ending (test_cli.CliTests.test_real_cli_short_ending) ... ok
+test_real_cli_slayer_with_shop_equipment_and_allocated_points (test_cli.CliTests.test_real_cli_slayer_with_shop_equipment_and_allocated_points) ... ok
+test_unknown_command_and_eof_are_handled (test_cli.CliTests.test_unknown_command_and_eof_are_handled) ... ok
+test_invalid_allocation_does_not_consume_points (test_economy_progression.EconomyTests.test_invalid_allocation_does_not_consume_points) ... ok
+test_merchant_buy_sell_and_full_inventory_rejection (test_economy_progression.EconomyTests.test_merchant_buy_sell_and_full_inventory_rejection) ... ok
+test_multiple_levels_give_exactly_five_each_and_remainder (test_economy_progression.EconomyTests.test_multiple_levels_give_exactly_five_each_and_remainder) ... ok
+test_tavern_insufficient_gold (test_economy_progression.EconomyTests.test_tavern_insufficient_gold) ... ok
+test_tavern_rest_leave_and_full_lives (test_economy_progression.EconomyTests.test_tavern_rest_leave_and_full_lives) ... ok
+test_unaffordable_purchase_and_empty_sale_do_not_mutate (test_economy_progression.EconomyTests.test_unaffordable_purchase_and_empty_sale_do_not_mutate) ... ok
+test_capacity_failure_keeps_everything (test_equipment.EquipmentTests.test_capacity_failure_keeps_everything) ... ok
+test_invalid_inventory_index_and_item_do_not_mutate (test_equipment.EquipmentTests.test_invalid_inventory_index_and_item_do_not_mutate) ... ok
+test_main_hand_priority_and_choice_when_both_full (test_equipment.EquipmentTests.test_main_hand_priority_and_choice_when_both_full) ... ok
+test_trait_overflow_does_not_remove_old_equipment (test_equipment.EquipmentTests.test_trait_overflow_does_not_remove_old_equipment) ... ok
+test_two_handed_counts_released_source_slot (test_equipment.EquipmentTests.test_two_handed_counts_released_source_slot) ... ok
+test_two_handed_is_removed_when_equipping_off_hand (test_equipment.EquipmentTests.test_two_handed_is_removed_when_equipping_off_hand) ... ok
+test_all_interrogation_stats_success_and_failure (test_game_routes.GameRoutesTests.test_all_interrogation_stats_success_and_failure) ... ok
+test_death_before_quest (test_game_routes.GameRoutesTests.test_death_before_quest) ... ok
+test_death_in_goblin_travel_and_orachulm (test_game_routes.GameRoutesTests.test_death_in_goblin_travel_and_orachulm) ... ok
+test_full_inventory_reward_can_be_replaced_or_skipped (test_game_routes.GameRoutesTests.test_full_inventory_reward_can_be_replaced_or_skipped) ... ok
+test_goblin_defeat_fails_quest (test_game_routes.GameRoutesTests.test_goblin_defeat_fails_quest) ... ok
+test_loss_in_travel_counts_and_does_not_fail_quest (test_game_routes.GameRoutesTests.test_loss_in_travel_counts_and_does_not_fail_quest) ... ok
+test_opening_alternatives_and_initial_time (test_game_routes.GameRoutesTests.test_opening_alternatives_and_initial_time) ... ok
+test_orachulm_report_win_and_escape (test_game_routes.GameRoutesTests.test_orachulm_report_win_and_escape) ... ok
+test_short_route_and_repeat_final_action (test_game_routes.GameRoutesTests.test_short_route_and_repeat_final_action) ... ok
+test_abstract_class_and_incomplete_subclass_cannot_be_created (test_posttest.PosttestTests.test_abstract_class_and_incomplete_subclass_cannot_be_created) ... ok
+test_subclasses_implement_both_methods_and_share_validation (test_posttest.PosttestTests.test_subclasses_implement_both_methods_and_share_validation) ... ok
+test_unrelated_choices_use_one_duck_typed_function (test_posttest.PosttestTests.test_unrelated_choices_use_one_duck_typed_function) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 1.189s
+
+OK

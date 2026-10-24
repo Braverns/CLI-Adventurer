@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 ENDINGS = {
     "DEAD": ("Petualangan Berakhir", "Nyawamu habis. Perjalanan petualang muda Fernley berakhir di sini."),
     "APPLE_FAILED": ("Penyelidikan Gagal", "Goblin mengalahkanmu. Quest Pak Warrey tidak berhasil diselesaikan."),

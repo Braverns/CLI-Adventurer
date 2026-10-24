@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from characters.character import Character
 from utils.stats import Stats
 

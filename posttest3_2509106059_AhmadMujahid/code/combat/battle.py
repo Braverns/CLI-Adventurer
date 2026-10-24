@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from random import Random
 from characters.combatant import Combatant
 from core.models import BattleResult

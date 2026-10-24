@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from content.balance import STAT_NAMES, require_integer
 
 class Stats:

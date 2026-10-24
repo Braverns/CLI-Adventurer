@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from content.balance import TAVERN_COST
 from core.models import Choice, EventResult
 from events.event import Event

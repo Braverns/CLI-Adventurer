@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from characters.character import Character
 from characters.classes.profession import Profession
 from content.balance import STAT_NAMES, STAT_POINTS_PER_LEVEL, exp_to_next_level, require_integer

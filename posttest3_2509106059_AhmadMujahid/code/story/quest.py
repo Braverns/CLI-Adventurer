@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from core.enums import QuestStatus
 
 class Quest:

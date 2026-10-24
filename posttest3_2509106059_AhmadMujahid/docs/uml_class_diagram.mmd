@@ -1,0 +1,110 @@
+classDiagram
+    class Event {
+        <<abstract>>
+        +event_id: str
+        +title: str
+        #_completed: bool
+        +get_choices(session)*
+        +resolve(session, choice_id)*
+        +validate_choice(session, choice_id)
+    }
+    class MonsterEvent {
+        +monster: Monster
+        +get_choices(session)
+        +resolve(session, choice_id)
+    }
+    class MerchantEvent {
+        +stock: list
+        +get_choices(session)
+        +resolve(session, choice_id)
+    }
+    class TavernEvent {
+        +rest_cost: int
+        +get_choices(session)
+        +resolve(session, choice_id)
+    }
+    class StoryEvent {
+        +nodes: dict
+        +current_node_id: str
+        +get_choices(session)
+        +resolve(session, choice_id)
+    }
+    Event <|-- MonsterEvent
+    Event <|-- MerchantEvent
+    Event <|-- TavernEvent
+    Event <|-- StoryEvent
+    class Character {
+        #_name: str
+        #_stats: Stats
+        +get_info()
+    }
+    class Player {
+        #_lives: int
+        #_stat_points: int
+        +gain_experience(amount)
+        +allocate_stat_points(name, amount)
+    }
+    class Monster {
+        +rarity: str
+        +exp_reward: int
+        +get_info()
+    }
+    class Inventory {
+        +items: list
+        +add_item(item)
+        +remove_item(slot)
+        +__len__()
+    }
+    class Equipment {
+        +main_hand: EquippableItem
+        +off_hand: EquippableItem
+        +equip_from_inventory(player, slot)
+    }
+    class Item {
+        +name: str
+        +price: int
+        +__str__()
+    }
+    class EquippableItem {
+        +allowed_slots: frozenset
+        +traits: list
+    }
+    class Combatant {
+        +owner: Character
+        -__health: float
+        +attack(target)
+    }
+    class Battle {
+        +player: Combatant
+        +enemy: Combatant
+        +step()
+    }
+    Character <|-- Player
+    Character <|-- Monster
+    Player *-- Inventory : membuat
+    Player *-- Equipment : membuat
+    Character *-- TraitManager : membuat
+    Inventory o-- Item : menampung objek mandiri
+    Equipment o-- EquippableItem : terpasang
+    Item <|-- EquippableItem
+    EquippableItem <|-- Weapon
+    EquippableItem <|-- Armor
+    EquippableItem <|-- Shield
+    EquippableItem <|-- Accessory
+    Battle o-- Combatant : menerima peserta
+    Combatant --> Character : owner
+    Combatant ..> Combatant : attack(target)
+    GameSession --> Event : memanggil kontrak
+    GameSession *-- EventDirector
+    GameSession *-- MissingAppleQuest
+    class Choice {
+        +label: str
+        +describe()
+    }
+    class ConditionalChoice {
+        +label: str
+        +required_stat: str
+        +describe()
+    }
+    note for Choice "Duck typing: tidak mewarisi ConditionalChoice"
+    note for ConditionalChoice "Keduanya dipakai oleh describe_options()"

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from core.enums import EquipmentSlot
 from items.item import Item
 

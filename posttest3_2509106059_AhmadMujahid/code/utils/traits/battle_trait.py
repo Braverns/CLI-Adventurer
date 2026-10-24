@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import random
 from utils.traits.trait import Trait
 from typing import TYPE_CHECKING

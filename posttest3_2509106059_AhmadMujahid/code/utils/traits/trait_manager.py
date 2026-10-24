@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from collections import defaultdict
 from utils.traits.trait_entry import TraitEntry
 

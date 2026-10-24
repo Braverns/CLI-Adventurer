@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from content.balance import require_integer
 
 class Item:

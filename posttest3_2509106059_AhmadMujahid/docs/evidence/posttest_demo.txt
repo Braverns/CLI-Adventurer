@@ -1,0 +1,59 @@
+Python: 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]
+Command: code/testing/posttest_demo.py
+
+ ______________________________________________________________________________
+| 1. BUKTI ABSTRAKSI                                                           |
+|                                                                              |
+| TypeError: Can't instantiate abstract class Event without an implementation  |
+| for abstract methods 'get_choices', 'resolve'                                |
+| Event wajib mengimplementasikan get_choices() dan resolve().                 |
+|______________________________________________________________________________|
+ ______________________________________________________________________________
+| 2. POLIMORFISME VIA PEWARISAN                                                |
+|                                                                              |
+| MonsterEvent.get_choices(): Hadapi Goblin Pencuri Apel                       |
+| resolve(): battle=True, selesai=False                                        |
+| validate_choice() konkret dari Event dipakai sebelum resolusi.               |
+| TavernEvent.get_choices(): Istirahat: 25 gold, pulihkan 1 nyawa              |
+| resolve(): battle=False, selesai=True                                        |
+| Nyawa pulih satu. Kamu kembali melanjutkan perjalanan.                       |
+| validate_choice() konkret dari Event dipakai sebelum resolusi.               |
+| MerchantEvent.get_choices(): Lanjutkan perjalanan                            |
+| resolve(): battle=False, selesai=True                                        |
+| Kamu meninggalkan pedagang.                                                  |
+| validate_choice() konkret dari Event dipakai sebelum resolusi.               |
+| StoryEvent.get_choices(): Bantu mengambil dan mengembalikan surat            |
+| resolve(): battle=False, selesai=True                                        |
+| Kamu mengembalikan surat yang tercecer. Sang pengelana memberi 10 gold dan 5 |
+| EXP.                                                                         |
+| validate_choice() konkret dari Event dipakai sebelum resolusi.               |
+|______________________________________________________________________________|
+ ______________________________________________________________________________
+| 3. DUCK TYPING                                                               |
+|                                                                              |
+| Choice dan ConditionalChoice tidak saling mewarisi dan tidak memiliki parent |
+| aplikasi bersama.                                                            |
+| Keduanya dipanggil melalui describe_options(), yang hanya memakai            |
+| describe().                                                                  |
+| Serang langsung                                                              |
+| Bujuk goblin [CHARISMA, kesulitan 18]                                        |
+|______________________________________________________________________________|
+ ______________________________________________________________________________
+| 4. MAGIC METHOD DAN RELASI                                                   |
+|                                                                              |
+| str(Item): Apel | Harga: 4 | Contoh item mandiri                             |
+| str(Stats): strength: 15 | agility: 11 | defense: 8 | intelligence: 3 |      |
+| charisma: 3                                                                  |
+| len(Inventory): 1 sebelum dihapus, 0 setelah dihapus.                        |
+| Agregasi: item tetap ada sesudah dikeluarkan: Apel.                          |
+| Asosiasi: Combatant.attack(target) menghasilkan 12 damage.                   |
+| Komposisi: inventory dua pemain berbeda: True.                               |
+| Player membuat Inventory dan Equipment-nya sendiri di constructor.           |
+|______________________________________________________________________________|
+ ______________________________________________________________________________
+| 5. POIN STAT PER LEVEL                                                       |
+|                                                                              |
+| 65 EXP menghasilkan kenaikan 2 level.                                        |
+| Level: 3 | Poin stat: 10 | Sisa EXP: 5                                       |
+| Setiap kenaikan level selalu memberi tepat 5 poin stat.                      |
+|______________________________________________________________________________|

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from content.catalog import create_stock, create_travel_monster
 from content.short_stories import create_short_story
 from core.enums import FlowPhase

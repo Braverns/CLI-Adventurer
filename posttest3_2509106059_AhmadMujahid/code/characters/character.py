@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from utils.stats import Stats
 from utils.traits.trait_manager import TraitManager
 

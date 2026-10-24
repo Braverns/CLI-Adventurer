@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from functools import partial
 from content.balance import sell_price
 from core.models import Choice, EventResult

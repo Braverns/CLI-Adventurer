@@ -1,4 +1,3 @@
-from __future__ import annotations
 import textwrap
 
 def render_box(title: str, lines=(), width: int = 76) -> str:

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 class Trait:
     def __init__(self, name: str, description: str, icon: str, max_stack: int) -> None:
         self.__name = name

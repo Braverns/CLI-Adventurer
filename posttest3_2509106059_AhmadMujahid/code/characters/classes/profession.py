@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from utils.stats import Stats
 
 class Profession:

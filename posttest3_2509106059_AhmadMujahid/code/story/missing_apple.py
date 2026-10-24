@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from functools import partial
 from content.balance import INTERROGATION_DIFFICULTY, QUEST_EXP, QUEST_GOLD, check_success
 from content.catalog import create_goblin, create_orachulm
