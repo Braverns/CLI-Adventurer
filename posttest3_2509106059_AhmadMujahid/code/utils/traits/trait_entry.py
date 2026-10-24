@@ -17,10 +17,10 @@ class TraitEntry:
         return self.__stack
 
 
-    def increase_stack(self, amount: int) -> None:
+    def increase_stack(self, amount: int) -> None: 
         if amount <= 0:
             raise ValueError("Tidak boleh negatif atau 0")
-
+        
         new_stack = self.__stack + amount
 
         if new_stack > self.trait.max_stack:
@@ -34,5 +34,6 @@ class TraitEntry:
 
         if amount <= 0:
             raise ValueError("Tidak boleh negatif atau 0")
-
+        
         self.__stack -= amount
+

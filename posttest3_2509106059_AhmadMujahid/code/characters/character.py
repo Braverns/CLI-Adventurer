@@ -21,3 +21,7 @@ class Character:
 
     def get_info(self) -> str:
         return f"Name: {self.name}"
+
+
+
+    

@@ -11,18 +11,22 @@ class ResourceTrait(Trait):
             effect[key] = value * stack
 
         return effect
-
+        
 
 class LuckiestAdventurer(ResourceTrait):
     def __init__(self) -> None:
         teks: str = "Beruntung"
-        super().__init__(name = "Luckiest Adventurer", max_stack = 5,
-                         description = teks, icon = "",
+        super().__init__(name = "Luckiest Adventurer", max_stack = 5, 
+                         description = teks, icon = "", 
                          effect = {"bonus_gold": 10, "equipment_chance": 0.1})
 
     def apply(self, character, stack: int) -> None:
+        current_gold = getattr(character, "gold")
         effect = self.get_effect(stack)
-        character.gain_gold(effect["bonus_gold"])
+        setattr(character, "gold", current_gold + effect["bonus_gold"])
 
     def on_reward(self, character, stack: int) -> None:
         self.apply(character, stack)
+
+
+

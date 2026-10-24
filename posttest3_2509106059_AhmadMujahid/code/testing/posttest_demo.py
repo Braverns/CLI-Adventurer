@@ -16,6 +16,7 @@ from events.tavern_event import TavernEvent
 from inventory.inventory import Inventory
 from items.item import Item
 
+
 def demonstrate_abstraction() -> None:
     try:
         Event("abstract", "Event abstrak", "Tidak dapat dibuat langsung")
@@ -25,22 +26,38 @@ def demonstrate_abstraction() -> None:
     else:
         raise AssertionError("ABC seharusnya tidak dapat diinstansiasi")
 
+
 def demonstrate_polymorphism() -> None:
     session = GameSession(create_player())
+
     session.player.lose_life()
+
     events = [MonsterEvent("demo_monster", create_goblin()), TavernEvent(),
               MerchantEvent(create_stock()), create_short_story()]
     lines = []
     # Satu loop, objek subclass berbeda, method yang sama.
+
     for event in events:
         choices = event.get_choices(session)
-        choice = next(option for option in choices if option.enabled)
+        choice = None
+
+        for option in choices:
+            if option.enabled:
+                choice = option
+                break
+
+        if choice is None:
+            raise StopIteration
+
         result = event.resolve(session, choice.choice_id)
+
         lines.append(f"{type(event).__name__}.get_choices(): {choice.describe()}")
         lines.append(f"resolve(): battle={result.battle_request is not None}, selesai={result.completed}")
         lines.extend(result.messages)
         lines.append("validate_choice() konkret dari Event dipakai sebelum resolusi.")
+
     show_box("2. POLIMORFISME VIA PEWARISAN", lines)
+
 
 def demonstrate_duck_typing() -> None:
     normal = Choice("attack", "Serang langsung")
@@ -53,16 +70,22 @@ def demonstrate_duck_typing() -> None:
         *describe_options([normal, checked]),
     ])
 
+
 def demonstrate_dunder_and_relationships() -> None:
     player = create_player()
     other = create_player("Arthur")
     item = Item("Apel", 4, "Contoh item mandiri")
     inventory = Inventory()
+
     inventory.add_item(item)
+
     count = len(inventory)
+
     inventory.remove_item(0)
+
     attacker, target = Combatant(player, 100), Combatant(create_goblin(), 100)
     damage = attacker.attack(target)
+
     show_box("4. MAGIC METHOD DAN RELASI", [
         f"str(Item): {item}",
         f"str(Stats): {player.stats}",
@@ -73,14 +96,17 @@ def demonstrate_dunder_and_relationships() -> None:
         "Player membuat Inventory dan Equipment-nya sendiri di constructor.",
     ])
 
+
 def demonstrate_level() -> None:
     player = create_player()
     levels = player.gain_experience(65)
+
     show_box("5. POIN STAT PER LEVEL", [
         f"65 EXP menghasilkan kenaikan {levels} level.",
         f"Level: {player.level} | Poin stat: {player.stat_points} | Sisa EXP: {player.experience}",
         "Setiap kenaikan level selalu memberi tepat 5 poin stat.",
     ])
+
 
 def main() -> None:
     demonstrate_abstraction()

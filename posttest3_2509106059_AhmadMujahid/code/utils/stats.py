@@ -1,14 +1,21 @@
-from content.balance import STAT_NAMES, require_integer
-
 class Stats:
     def __init__(self, strength: int, agility: int, defense: int, intelligence: int, charisma: int) -> None:
-        for name, value in zip(STAT_NAMES, (strength, agility, defense, intelligence, charisma)):
-            require_integer(value, name)
-            setattr(self, name, value)
+        self.strength = strength
+        self.agility = agility
+        self.defense = defense
+        self.intelligence = intelligence
+        self.charisma = charisma
 
     def add(self, bonus) -> None:
-        for name in STAT_NAMES:
-            setattr(self, name, getattr(self, name) + getattr(bonus, name))
+        self.strength += bonus.strength
+        self.agility += bonus.agility
+        self.defense += bonus.defense
+        self.intelligence += bonus.intelligence
+        self.charisma += bonus.charisma
 
     def __str__(self) -> str:
-        return " | ".join(f"{name}: {getattr(self, name)}" for name in STAT_NAMES)
+        return (f"strength: {self.strength} | "
+                f"agility: {self.agility} | "
+                f"defense: {self.defense} | "
+                f"intelligence: {self.intelligence} | "
+                f"charisma: {self.charisma}")

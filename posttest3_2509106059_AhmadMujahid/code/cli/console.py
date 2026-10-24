@@ -1,18 +1,47 @@
 import textwrap
 
-def render_box(title: str, lines=(), width: int = 76) -> str:
+
+def render_box(title: str, lines = (), width: int = 76) -> str:
     content = [title, ""]
+
     for line in lines:
-        for paragraph in str(line).splitlines() or [""]:
-            content.extend(textwrap.wrap(paragraph, width=width, break_long_words=True) or [""])
+        paragraphs = str(line).splitlines()
+
+        if not paragraphs:
+            paragraphs = [""]
+
+        for paragraph in paragraphs:
+            wrapped_lines = textwrap.wrap(paragraph, width = width, break_long_words = True)
+
+            if not wrapped_lines:
+                wrapped_lines = [""]
+
+            content.extend(wrapped_lines)
+
     rows = [" " + "_" * (width + 2) + " "]
-    rows.extend("| " + line.ljust(width) + " |" for line in content)
+
+    for line in content:
+        row = "| " + line.ljust(width) + " |"
+
+        rows.append(row)
+
     rows.append("|" + "_" * (width + 2) + "|")
+
     return "\n".join(rows)
 
-def show_box(title: str, lines=()) -> None:
-    print(render_box(title, lines))
+
+def show_box(title: str, lines = ()) -> None:
+    box = render_box(title, lines)
+
+    print(box)
+
 
 def describe_options(options) -> list[str]:
-    # Duck typing: pilihan biasa dan pilihan cek memiliki describe().
-    return [option.describe() for option in options]
+    descriptions = []
+
+    for option in options:
+        description = option.describe()
+
+        descriptions.append(description)
+
+    return descriptions

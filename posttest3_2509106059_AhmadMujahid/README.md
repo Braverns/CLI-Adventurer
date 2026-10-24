@@ -150,8 +150,11 @@ Fungsi `demonstrate_polymorphism()` memasukkan objek-objek tersebut dalam satu l
 ```python
 for event in events:
     choices = event.get_choices(session)
-    choice = next(option for option in choices if option.enabled)
-    result = event.resolve(session, choice.choice_id)
+
+    for choice in choices:
+        if choice.enabled:
+            result = event.resolve(session, choice.choice_id)
+            break
 ```
 
 Perilaku ditentukan oleh implementasi masing-masing objek, bukan pemeriksaan jenis objek di pemanggil.
@@ -168,7 +171,13 @@ Keduanya dipanggil melalui fungsi `describe_options()` dalam `code/cli/console.p
 
 ```python
 def describe_options(options) -> list[str]:
-    return [option.describe() for option in options]
+    descriptions = []
+
+    for option in options:
+        description = option.describe()
+        descriptions.append(description)
+
+    return descriptions
 ```
 
 `Choice.describe()` menghasilkan label pilihan biasa. `ConditionalChoice.describe()` menambahkan nama stat dan kesulitan pemeriksaan pada label. Fungsi yang sama digunakan saat menampilkan pilihan permainan.
@@ -225,7 +234,7 @@ Jalankan pengujian:
 python -m unittest discover -s tests -v
 ```
 
-Seluruh 34 pengujian telah lulus menggunakan Python 3.14.2. Pengujian mencakup cabang cerita, aturan nyawa, transaksi, equipment, kenaikan level, dan konsep OOP.
+Seluruh 35 pengujian telah lulus menggunakan Python 3.14.2. Pengujian mencakup cabang cerita, aturan nyawa, transaksi, equipment, kenaikan level, dan konsep OOP.
 
 **Screenshot permainan:** simpan tampilan cerita atau epilog sebagai `images/output_permainan.png`.
 

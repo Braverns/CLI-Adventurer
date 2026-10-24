@@ -10,9 +10,9 @@ class BattleTrait(Trait):
         super().__init__(name, description, icon, max_stack)
         self.chance = chance
 
-    def on_attack(self, attacker: Combatant, target: Combatant, stack: int, rng=None) -> None:
+    def on_attack(self, attacker: Combatant, target: Combatant, stack: int) -> None:
         pass
-
+        
 
 class Toxin(BattleTrait):
     def __init__(self) -> None:
@@ -21,17 +21,17 @@ class Toxin(BattleTrait):
         self.damage_percent = 0.03
         self.duration = 3
         self.max_duration = 9
+        
 
-
-    def on_attack(self, attacker: Combatant, target: Combatant, stack: int, rng=None) -> None:
-        roll = (rng if rng is not None else random).random()
+    def on_attack(self, attacker: Combatant, target: Combatant, stack: int) -> None:
+        roll = random.random()
         effect = self.get_effect(stack)
         if roll < effect["chance"]:
             status = PoisonStatus(effect["duration"], effect["max_duration"], effect["damage_percent"])
             target.add_status(status)
 
     def get_effect(self, stack: int) -> dict:
-        effect = {"chance": self.chance * stack, "damage_percent": self.damage_percent,
+        effect = {"chance": self.chance * stack, "damage_percent": self.damage_percent, 
                    "duration": self.duration, "max_duration": self.max_duration}
         return effect
 
@@ -51,3 +51,4 @@ class PoisonStatus:
 
     def extend_duration(self, amount: int) -> None:
         self.duration = min(self.duration + amount, self.max_duration)
+
