@@ -1,0 +1,14 @@
+from __future__ import annotations
+import sys
+import unittest
+from pathlib import Path
+
+def main() -> None:
+    root = Path(__file__).resolve().parents[2]
+    sys.path.insert(0, str(root / "code"))
+    suite = unittest.defaultTestLoader.discover(str(root / "tests"))
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    raise SystemExit(not result.wasSuccessful())
+
+if __name__ == "__main__":
+    main()
