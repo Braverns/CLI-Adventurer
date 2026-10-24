@@ -8,8 +8,7 @@ from story.quest import Quest
 
 class MissingAppleQuest(Quest):
     def __init__(self) -> None:
-        super().__init__("missing_apple", "The Missing Apple",
-                         "Pak Warrey kehilangan apel dari panennya. Selidiki pencurian dalam tiga hari.")
+        super().__init__("missing_apple", "The Missing Apple", "Pak Warrey kehilangan apel dari panennya. Selidiki pencurian dalam tiga hari.")
 
         self.knows_orachulm = False
         self.orachulm_outcome = "not_met"
@@ -30,8 +29,7 @@ class MissingAppleQuest(Quest):
             "int": self._interrogate_int,
             "str": self._interrogate_str,
         }
-        text = (f"{self.description}\nQuest diterima. Malam pertama, kamu berjaga di ladang. "
-                "Seekor goblin membawa apel sambil bergumam tentang persembahan kepada-Nya.")
+        text = f"{self.description}\nQuest diterima. Malam pertama, kamu berjaga di ladang. Seekor goblin membawa apel sambil bergumam tentang persembahan kepada-Nya."
         node = StoryNode("goblin", text, choices, actions)
         nodes = {"goblin": node}
 
@@ -68,8 +66,7 @@ class MissingAppleQuest(Quest):
         if result.winner.owner is not session.player:
             self.fail()
 
-            return EventResult(["Kamu gagal menghentikan goblin. Quest gagal."], True,
-                               "failed", ending_id = "APPLE_FAILED")
+            return EventResult(["Kamu gagal menghentikan goblin. Quest gagal."], True, "failed", ending_id = "APPLE_FAILED")
 
         if self.knows_orachulm:
             outcome = "informed"
@@ -82,8 +79,7 @@ class MissingAppleQuest(Quest):
 
     def create_orachulm_event(self) -> StoryEvent:
         self.stage = "orachulm"
-        text = ("Malam hari kedua. Di tempat yang disebut goblin, kamu menemukan sosok hijau "
-                "besar dengan taring bawah: orc bernama Orachulm.")
+        text = "Malam hari kedua. Di tempat yang disebut goblin, kamu menemukan sosok hijau besar dengan taring bawah: orc bernama Orachulm."
         choices = [
             Choice("report", "Kembali dan laporkan hasil penyelidikan"),
             Choice("fight", "Lawan Orachulm"),
@@ -115,13 +111,11 @@ class MissingAppleQuest(Quest):
 
             sword = GreatSword()
 
-            return EventResult(["Orachulm tumbang. Kamu dikenal sebagai Orc Slayer."],
-                               True, "done", granted_items = [sword])
+            return EventResult(["Orachulm tumbang. Kamu dikenal sebagai Orc Slayer."], True, "done", granted_items = [sword])
 
         self.orachulm_outcome = "escaped"
 
-        return EventResult(["Kamu berhasil kabur dan tetap dapat melaporkan hasil penyelidikan."],
-                           True, "done")
+        return EventResult(["Kamu berhasil kabur dan tetap dapat melaporkan hasil penyelidikan."], True, "done")
 
     def create_report_event(self) -> StoryEvent:
         choices = [Choice("report", "Laporkan hasil penyelidikan")]

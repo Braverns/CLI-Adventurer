@@ -1,6 +1,7 @@
 from utils.stats import Stats
 from utils.traits.trait_manager import TraitManager
 
+
 class Character:
     def __init__(self, name: str, stats: Stats) -> None:
         self._name = name
@@ -21,7 +22,3 @@ class Character:
 
     def get_info(self) -> str:
         return f"Name: {self.name}"
-
-
-
-    

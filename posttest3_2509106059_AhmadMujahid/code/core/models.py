@@ -10,8 +10,7 @@ class Choice:
 
 
 class ConditionalChoice:
-    def __init__(self, choice_id: str, label: str, required_stat: str, difficulty: int,
-                 enabled: bool = True, disabled_reason: str = "") -> None:
+    def __init__(self, choice_id: str, label: str, required_stat: str, difficulty: int, enabled: bool = True, disabled_reason: str = "") -> None:
         self.choice_id = choice_id
         self.label = label
         self.required_stat = required_stat
@@ -24,8 +23,7 @@ class ConditionalChoice:
 
 
 class EventResult:
-    def __init__(self, messages = None, completed: bool = False, outcome_id: str = "",
-                 battle_request = None, granted_items = None, ending_id: str = "") -> None:
+    def __init__(self, messages = None, completed: bool = False, outcome_id: str = "", battle_request = None, granted_items = None, ending_id: str = "") -> None:
         self.messages = []
         self.granted_items = []
 
@@ -48,8 +46,7 @@ class BattleResult:
 
 
 class EndingResult:
-    def __init__(self, ending_id: str, title: str, text: str, remaining_lives: int, level: int,
-                 gold: int, quest_status: str, reputation: tuple) -> None:
+    def __init__(self, ending_id: str, title: str, text: str, remaining_lives: int, level: int, gold: int, quest_status: str, reputation: tuple) -> None:
         self.ending_id = ending_id
         self.title = title
         self.text = text

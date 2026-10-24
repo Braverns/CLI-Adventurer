@@ -7,8 +7,7 @@ from utils.stats import Stats
 
 
 class Player(Character):
-    def __init__(self, name: str, stats: Stats, lives: int, level: int, gold: int,
-                 profession: Profession, max_lives: int | None = None) -> None:
+    def __init__(self, name: str, stats: Stats, lives: int, level: int, gold: int, profession: Profession, max_lives: int | None = None) -> None:
         super().__init__(name, stats)
         require_integer(lives, "Nyawa")
         require_integer(level, "Level", 1)
@@ -114,5 +113,4 @@ class Player(Character):
         self.equipment.equip_from_inventory(self, slot, target_slot)
 
     def get_info(self) -> str:
-        return (f"Player: {self.name} | Level: {self.level} | EXP: {self.experience} | "
-                f"Poin: {self.stat_points} | Nyawa: {self.lives}/{self.max_lives} | Gold: {self.gold}")
+        return f"Player: {self.name} | Level: {self.level} | EXP: {self.experience} | Poin: {self.stat_points} | Nyawa: {self.lives}/{self.max_lives} | Gold: {self.gold}"

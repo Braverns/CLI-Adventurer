@@ -49,8 +49,7 @@ class Battle:
 
         damage = attacker.attack(target)
 
-        logs.append(f"{attacker.owner.name} menyerang {target.owner.name}: {damage} damage; "
-                    f"HP target {target.health:g}/{target.max_health:g}.")
+        logs.append(f"{attacker.owner.name} menyerang {target.owner.name}: {damage} damage; HP target {target.health:g}/{target.max_health:g}.")
 
         if not target.is_alive():
             return logs + self._finish(attacker, target)

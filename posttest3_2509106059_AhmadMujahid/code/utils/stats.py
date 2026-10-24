@@ -14,8 +14,4 @@ class Stats:
         self.charisma += bonus.charisma
 
     def __str__(self) -> str:
-        return (f"strength: {self.strength} | "
-                f"agility: {self.agility} | "
-                f"defense: {self.defense} | "
-                f"intelligence: {self.intelligence} | "
-                f"charisma: {self.charisma}")
+        return f"strength: {self.strength} | agility: {self.agility} | defense: {self.defense} | intelligence: {self.intelligence} | charisma: {self.charisma}"

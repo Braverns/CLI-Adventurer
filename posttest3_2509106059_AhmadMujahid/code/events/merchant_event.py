@@ -15,8 +15,7 @@ class MerchantEvent(Event):
 
         for index, item in enumerate(self.stock):
             enabled = player.gold >= item.price and player.inventory.check_slot()
-            choice = Choice(f"buy:{index}", f"Beli {item.name}: {item.price} gold", enabled,
-                            "Gold tidak cukup atau inventory penuh")
+            choice = Choice(f"buy:{index}", f"Beli {item.name}: {item.price} gold", enabled, "Gold tidak cukup atau inventory penuh")
 
             choices.append(choice)
 

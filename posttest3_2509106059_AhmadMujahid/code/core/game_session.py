@@ -35,8 +35,7 @@ class GameSession:
         self.status = RunStatus.ACTIVE
         self.active_event = self.director.create_next_event(self)
 
-        return ["Akhetaria telah menyatukan lima benua. Di Fernley, usia 15 tahun menandai kedewasaan.",
-                "Kamu memilih menjadi petualang di satu-satunya guild kota ini."]
+        return ["Akhetaria telah menyatukan lima benua. Di Fernley, usia 15 tahun menandai kedewasaan.", "Kamu memilih menjadi petualang di satu-satunya guild kota ini."]
 
     def _require_active(self) -> None:
         if self.status is not RunStatus.ACTIVE:
@@ -107,8 +106,7 @@ class GameSession:
 
         if result.battle_request is not None:
             monster = result.battle_request
-            self.active_battle = Battle(Combatant(self.player, COMBAT_MAX_HEALTH),
-                                        Combatant(monster, monster.max_health), self.rng)
+            self.active_battle = Battle(Combatant(self.player, COMBAT_MAX_HEALTH), Combatant(monster, monster.max_health), self.rng)
 
             return messages + [f"Battle dimulai: {monster.name}. HP combat dipulihkan penuh."]
 
@@ -188,9 +186,7 @@ class GameSession:
 
     def finish_run(self, ending_id: str) -> None:
         title, text = ENDINGS[ending_id]
-        self.ending = EndingResult(ending_id, title, text, self.player.lives,
-                                   self.player.level, self.player.gold, self.quest.status.value,
-                                   tuple(sorted(self.player.reputation)))
+        self.ending = EndingResult(ending_id, title, text, self.player.lives, self.player.level, self.player.gold, self.quest.status.value, tuple(sorted(self.player.reputation)))
         self.status = RunStatus.FINISHED
         self.director.phase = FlowPhase.FINISHED
         self.active_battle = None
